@@ -7,14 +7,14 @@ function getComputerChoice() {
     return computerSelection.toUpperCase();
 }
 
-console.log(getComputerChoice())
 
 // to get a choice from options from the player
 
 function getPlayerChoice() {
     const playerSelection = prompt('What is your choice').toUpperCase()
 
-    if ((playerSelection == "ROCK") || (playerSelection == "PAPER") || (playerSelection == "SCISSORS")) {
+    if ((playerSelection == "ROCK") ||                 (playerSelection == "PAPER") ||
+    (playerSelection == "SCISSORS")) {
         return playerSelection;
     } else {
         alert('Wrong choice');
@@ -23,49 +23,22 @@ function getPlayerChoice() {
 }
 
 function playRound(playerSelection, computerSelection){
-    let a = getPlayerChoice();
+    const a = getPlayerChoice();
     let b = getComputerChoice().toUpperCase();
-    let winner;
+    let winner = [];
   
-    if (a == 'ROCK' && b == 'PAPER') {
-        let winner = 'Computer';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    } else if (a == 'ROCK' && b == 'SCISSORS') {
-        let winner = 'Player';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    } else if (a == 'ROCK' && b == 'ROCK' ) {
-        let winner = 'Draw';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    } else if (a == 'SCISSORS' && b == 'PAPER') {
-        let winner= 'Player';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    } else if (a == 'SCISSORS' && b == 'ROCK') {
-        let winner = 'Computer';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    } else if (a == 'SCISSORS' && b == 'SCISSORS') {
-        let winner = 'Draw';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    } else if (a == 'PAPER' && b == 'PAPER') {
-        let winner = 'Draw';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    } else if (a == 'PAPER' && b == 'ROCK') {
-        let winner = 'Player';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    } else if (a == 'PAPER' && b == 'SCISSORS') {
-        let winner = 'Computer';
-        console.log(`The winner is ${winner}`);
-        return winner;
-    }
+    if ((a == 'ROCK' && b == 'PAPER') || 
+        (a == 'SCISSORS' && b == 'ROCK') || 
+        (a == 'PAPER' && b == 'SCISSORS')) {
+            return winner=['Computer',`You lose! ${a} beats ${b}`];
+    } else if ((a == 'ROCK' && b == 'SCISSORS') || 
+        (a == 'SCISSORS' && b == 'PAPER') || 
+        (a == 'PAPER' && b == 'ROCK')) {
+            return winner=['Player',`You win! ${b} beats ${a}`];
+    } else {
+        return winner=['draw','Round is draw'];
+    } 
 }
-
 
 function game(){
     let scoreComputer = 0;
@@ -73,15 +46,20 @@ function game(){
     let scoreDraw = 0;
 
     for (let i =0; i< 5; i++){
-        winner = playRound();
-        if (winner == 'Computer'){
+        const winner = playRound();
+        if (winner[0] == 'Computer'){ 
+            console.log(winner[1]);
             scoreComputer += 1;
-        } else if (winner == 'Player'){
+        } else if (winner[0] == 'Player'){
+            console.log(winner[1]);
             scorePlayer += 1;
         } else {
+            console.log('round draw');
             scoreDraw += 1;
         }
     }
+
+    scoreComputer > scorePlayer ? console.log(`The winner is computer with wins in ${scoreComputer} rounds`) : console.log(`The winner is player with wins in ${scorePlayer} rounds`)
 
     console.log(`player has won ${scorePlayer} rounds, computer has won ${scoreComputer} rounds and ${scoreDraw} rounds are draw`)
 }
