@@ -22,6 +22,7 @@ function getPlayerChoice() {
     }
 }
 
+
 function playRound(playerSelection, computerSelection){
     const a = getPlayerChoice();
     let b = getComputerChoice().toUpperCase();
@@ -59,7 +60,7 @@ function game(){
         }
     }
 
-    scoreComputer > scorePlayer ? console.log(`The winner is computer with wins in ${scoreComputer} rounds`) : console.log(`The winner is player with wins in ${scorePlayer} rounds`)
+    scoreComputer == scorePlayer ? console.log("It is a draw") : scoreComputer > scorePlayer ? console.log(`The winner is computer with wins in ${scoreComputer} rounds`) : console.log(`The winner is player with wins in ${scorePlayer} rounds`)
 
     console.log(`player has won ${scorePlayer} rounds, computer has won ${scoreComputer} rounds and ${scoreDraw} rounds are draw`)
 }
